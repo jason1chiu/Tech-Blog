@@ -1,0 +1,15 @@
+<div class="profile">
+  <h1>{{user.username}}</h1>
+  <p>{{user.email}}</p>
+  <p>{{user.bio}}</p>
+  <a href="/profile/edit">Edit Profile</a>
+</div>
+
+<h2>Posts by {{user.username}}</h2>
+<ul>
+  {{#each posts}}
+    <li>
+      <a href="/post/{{id}}">{{title}}</a>
+    </li>
+  {{/each}}
+</ul>
