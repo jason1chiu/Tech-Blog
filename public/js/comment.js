@@ -2,9 +2,7 @@ const commentFormHandler = async (event) => {
   event.preventDefault();
 
   const comment = document.querySelector('#comment-body').value.trim();
-  const post_id = window.location.toString().split('/')[
-      window.location.toString().split('/').length - 1
-  ];
+  const post_id = window.location.pathname.split('/').pop();
 
   if (comment) {
     const response = await fetch('/api/comments', {

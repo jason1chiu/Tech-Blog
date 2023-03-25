@@ -2,15 +2,15 @@
 const editPostForm = document.querySelector('.edit-post-form');
 editPostForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const title = editPostForm.querySelector('[name="title"]').value;
-  const content = editPostForm.querySelector('[name="content"]').value;
+  const title = editPostForm.querySelector('[name="post-title"]').value;
+  const body = editPostForm.querySelector('[name="post-body"]').value;
   const postId = editPostForm.dataset.postId;
 
   // Make API request to update post
   try {
     const response = await fetch(`/api/posts/${postId}`, {
       method: 'PUT',
-      body: JSON.stringify({ title, content }),
+      body: JSON.stringify({ title, body }),
       headers: { 'Content-Type': 'application/json' }
     });
     if (response.ok) {

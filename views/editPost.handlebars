@@ -1,34 +1,31 @@
-<article>
-  <a href="/dashboard"> &larr; Back To Dashboard</a>
-  <h2>
-    Edit Post
-  </h2>
-  <form class="edit-post-form">
-    <div>
-      <input name="post-title" type="text" size="60" value="{{post.title}}" />
+<section class="container mt-5">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      <a href="/dashboard" class="mb-3 d-block"> &larr; Back To Dashboard</a>
+      <h2 class="text-center mb-4">
+        Edit Post
+      </h2>
+      <form class="edit-post-form">
+        <div class="form-group">
+          <input name="post-title" type="text" class="form-control" value="{{post.title}}" />
+        </div>
+        <div class="form-group">
+          <textarea name="post-body" rows="10" class="form-control">{{post.body}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="button" class="btn btn-danger ml-2 delete-post-btn">Delete Post</button>
+      </form>
+      <form class="comment-form mt-4">
+        <div class="form-group">
+          <textarea name="comment-body" class="form-control" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Comment</button>
+      </form>
+      {{> comments post.comments}}
     </div>
-    <div>
-      <textarea name="post-body" rows="10" cols="60">{{post.body}}</textarea>
-    </div>
-    <div>
-      <button type="submit">Save Changes</button>
-      <button type="button" class="delete-post-btn">Delete Post</button>
-    </div>
-  </form>
-</article>
-
-<form class="comment-form">
-  <div>
-    <textarea name="comment-body"></textarea>
   </div>
+</section>
 
-  <div>
-    <button type="submit">Add Comment</button>
-  </div>
-</form>
-
-{{> comments post.comments}}
-
-<script src="../assets/js/editPost.js"></script>
-<script src="../assets/js/deletePost.js"></script>
-<script src="../assets/js/comment.js"></script>
+<script src="./js/editPost.js"></script>
+<script src="/js/deletePost.js"></script>
+<script src="/js/comment.js"></script>
