@@ -6,6 +6,14 @@ const dashboardRoutes = require('./dashboardRoutes');
 
 router.use('/api', apiRoutes);
 router.use('/', homeRoutes);
+router.get('/login', (req, res) => {
+  res.render('login')
+})
+
+router.get('/signup', (req, res) => {
+  res.render('signup')
+})
+
 router.use('/dashboard', dashboardRoutes);
 
 router.use((req, res) => {
