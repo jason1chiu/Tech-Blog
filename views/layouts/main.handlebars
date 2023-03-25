@@ -1,50 +1,58 @@
-<!doctype html>
-<html>
-  <head>
-    <title>{{title}}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="/">My Website</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home</a>
-          </li>
-          {{#if loggedIn}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tech Blog</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-lArf0Qxh8hhK2QrgsL4d4yDf6UWoW6UeJAbTshTbyZoM6bqThnYz+yw79lGc0yL1" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="wrapper">
+    <header class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Tech BLOG <i class="bi bi-house-fill"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            {{#if loggedIn}}
             <li class="nav-item">
               <a class="nav-link" href="/dashboard">Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/profile">Profile</a>
+              <button id="logout" class="btn btn-outline-light">Logout</button>
             </li>
+            {{else}}
             <li class="nav-item">
-              <form class="logout-form" method="POST" action="/logout">
-                <button type="submit" class="nav-link btn btn-link">Logout</button>
-              </form>
+              <a class="nav-link" href="/dashboard">Dashboard</a>
             </li>
-          {{else}}
             <li class="nav-item">
               <a class="nav-link" href="/login">Login</a>
             </li>
-          {{/if}}
-        </ul>
+            {{/if}}
+          </ul>
+        </div>
       </div>
-    </nav>
+    </header>
+    <main class="container mt-5">
+      {{{ body }}}
+    </main>
+    <footer class="bg-dark text-white text-center p-3 mt-5">
+      Share Kindly
+    </footer>
+  </div>
 
-    <div class="container mt-5">
-      {{{body}}}
-    </div>
+{{#if loggedIn}}
+<script src="/js/logout.js"></script>
+{{/if}}
 
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    <script src="../../utils/helpers.js"></script>
-  </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Z8WZz0+uV7c0zJOYYHTf8WCh/R+NN0mJr43qgrGtx2TbT09FcLLG6f9UJ/9Ud8yW" crossorigin="anonymous"></script>
+
+</body>
+
 </html>
