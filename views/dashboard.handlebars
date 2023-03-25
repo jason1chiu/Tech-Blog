@@ -36,7 +36,7 @@
         <ul class="list-group">
           {{#each posts as |post|}}
           <li class="list-group-item d-flex justify-content-between align-items-center">
-            {{> post-info post}}
+            {{> postInfo post}}
             <a href="/dashboard/edit/{{post.id}}" class="edit-link btn btn-secondary">Edit post</a>
           </li>
           {{/each}}
