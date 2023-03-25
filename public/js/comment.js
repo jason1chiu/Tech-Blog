@@ -14,6 +14,7 @@ const commentFormHandler = async (event) => {
     });
 
     if (response.ok) {
+      console.log('Comment added successfully');
       document.location.reload();
     } else {
       alert(response.statusText);
@@ -21,6 +22,4 @@ const commentFormHandler = async (event) => {
   }
 };
 
-document
-  .querySelector('.comment-form')
-  .addEventListener('submit', commentFormHandler);
+document.querySelector('.mt-3').addEventListener('submit', commentFormHandler);
