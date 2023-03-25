@@ -14,8 +14,8 @@
             <p class="card-text">{{post.description}}</p>
             <a href="/post/{{post.id}}" class="btn btn-primary">Read More</a>
           </div>
-          <div class="card-footer">
-            <small class="text-muted">Posted by {{post.user.username}} on {{format_date post.created_at}}</small>
+            <div class="card-footer">
+            <small class="text-muted">Posted by {{post.user.username}} on {{helper.formatDate post.created_at}}</small>
           </div>
         </div>
       </div>
