@@ -43,13 +43,7 @@ router.get('/post/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    attributes: [
-      'id',
-//      'url',
-      'title',
-      'post_content',
-      'created_at',
-    ],
+    attributes: ['id', 'title', 'post_content', 'created_at'],
     include: [
       {
         model: Comment,
@@ -82,6 +76,25 @@ router.get('/post/:id', (req, res) => {
       console.log(err);
       res.status(500).json(err);
     });
+});
+
+//login
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('login');
+});
+
+router.get('/signup', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('signup');
 });
 
 module.exports = router;
