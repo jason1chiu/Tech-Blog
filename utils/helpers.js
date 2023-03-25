@@ -1,9 +1,5 @@
-module.exports = {
-  formatDate: (date) => {
-    return new Date(date).toLocaleDateString();
-  },
+function format_date(date) {
+  return `${new Date(date).getMonth() + 1}/${new Date(date).getDate()}/${new Date(date).getFullYear()}`;
+}
 
-  pluralize: (word, count) => {
-    return count === 1 ? word : word + 's';
-  }
-};
+module.exports = { format_date }
