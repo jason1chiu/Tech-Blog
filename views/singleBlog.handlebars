@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="card-body">
+    {{> post-info post}}
+
+    {{#if loggedIn}}
+    <form class="mt-3">
+      <div class="form-group">
+        <label for="comment-body">Add a comment:</label>
+        <textarea class="form-control" id="comment-body" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {{/if}}
+
+    {{> comments post.comments}}
+  </div>
+</div>
+
+{{#if loggedIn}}
+<script src="js/comment.js"></script>
+{{/if}}
