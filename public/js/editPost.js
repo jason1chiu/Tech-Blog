@@ -42,3 +42,27 @@ deletePostButton.addEventListener('click', async () => {
     console.error(error);
   }
 });
+
+// Handle comment submission
+const commentForm = document.querySelector('.comment-form');
+commentForm.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  const commentBody = commentForm.querySelector('[name="comment-body"]').value;
+  const postId = editPostForm.dataset.postId;
+
+  // Make API request to add comment
+  try {
+    const response = await fetch(`/api/comments`, {
+      method: 'POST',
+      body: JSON.stringify({ commentBody, postId }),
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if (response.ok) {
+      window.location.reload();
+    } else {
+      throw new Error('Failed to add comment');
+    }
+  } catch (error) {
+    console.error(error);
+  }
+});
