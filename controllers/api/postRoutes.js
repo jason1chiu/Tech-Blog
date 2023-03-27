@@ -5,7 +5,7 @@ const withAuth = require('../../utils/auth');
 // GET all posts
 router.get('/', (req, res) => {
   Post.findAll({
-    attributes: ['id', 'title', 'created_at', 'post_text'],
+    attributes: ['id', 'title', 'created_at', 'post_content'],
     order: [['created_at', 'DESC']],
     include: [
       {
@@ -35,7 +35,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    attributes: ['id', 'title', 'created_at', 'post_text'],
+    attributes: ['id', 'title', 'created_at', 'post_content'],
     include: [
       {
         model: User,
@@ -68,7 +68,7 @@ router.get('/:id', (req, res) => {
 router.post('/', withAuth, (req, res) => {
   Post.create({
     title: req.body.title,
-    post_text: req.body.post_text,
+    post_content: req.body.post_content,
     user_id: req.session.user_id
   })
     .then(dbPostData => res.json(dbPostData))
@@ -83,7 +83,7 @@ router.put('/:id', withAuth, (req, res) => {
   Post.update(
     {
       title: req.body.title,
-      post_text: req.body.post_text
+      post_content: req.body.post_content
     },
     {
       where: {

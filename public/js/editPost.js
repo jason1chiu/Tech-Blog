@@ -3,14 +3,14 @@ const editPostForm = document.querySelector('.edit-post-form');
 editPostForm.addEventListener('submit', async (event) => {
   event.preventDefault();
   const title = editPostForm.querySelector('[name="post-title"]').value;
-  const body = editPostForm.querySelector('[name="post-body"]').value;
+  const post_content = editPostForm.querySelector('[name="post-body"]').value;
   const postId = editPostForm.dataset.postId;
 
   // Make API request to update post
   try {
     const response = await fetch(`/api/posts/${postId}`, {
       method: 'PUT',
-      body: JSON.stringify({ title, body }),
+      body: JSON.stringify({ title, post_content }),
       headers: { 'Content-Type': 'application/json' }
     });
     if (response.ok) {
@@ -47,14 +47,14 @@ deletePostButton.addEventListener('click', async () => {
 const commentForm = document.querySelector('.comment-form');
 commentForm.addEventListener('submit', async (event) => {
   event.preventDefault();
-  const commentBody = commentForm.querySelector('[name="comment-body"]').value;
+  const comment_text = commentForm.querySelector('[name="comment-body"]').value;
   const postId = editPostForm.dataset.postId;
 
   // Make API request to add comment
   try {
     const response = await fetch(`/api/comments`, {
       method: 'POST',
-      body: JSON.stringify({ commentBody, postId }),
+      body: JSON.stringify({ comment_text, postId }),
       headers: { 'Content-Type': 'application/json' }
     });
     if (response.ok) {
