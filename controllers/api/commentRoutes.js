@@ -3,14 +3,29 @@ const { Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 // GET all comments
+
 router.get('/', (req, res) => {
-  Comment.findAll({})
+  Comment.findAll({
+    include: {
+      model: User,
+      attributes: ['username']
+    }
+  })
     .then(dbCommentData => res.json(dbCommentData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
     });
 });
+
+// router.get('/', (req, res) => {
+//   Comment.findAll({})
+//     .then(dbCommentData => res.json(dbCommentData))
+//     .catch(err => {
+//       console.log(err);
+//       res.status(500).json(err);
+//     });
+// });
 
 // CREATE a new comment
 router.post('/', withAuth, (req, res) => {
@@ -57,23 +72,27 @@ router.put('/:id', withAuth, (req, res) => {
 });
 
 // DELETE a comment by ID
-router.delete('/:id', withAuth, (req, res) => {
-  Comment.destroy({
-    where: {
-      id: req.params.id
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const commentData = await Comment.findByPk(req.params.id);
+    if (!commentData) {
+      res.status(404).json({ message: 'No comment found with this id' });
+      return;
     }
-  })
-    .then(dbCommentData => {
-      if (!dbCommentData) {
-        res.status(404).json({ message: 'No comment found with this id' });
-        return;
+    if (commentData.user_id !== req.session.user_id) {
+      res.status(403).json({ message: 'You are not authorized to delete this comment' });
+      return;
+    }
+    await Comment.destroy({
+      where: {
+        id: req.params.id
       }
-      res.json(dbCommentData);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(500).json(err);
     });
+    res.json(commentData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
