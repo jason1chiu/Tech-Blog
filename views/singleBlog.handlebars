@@ -1,20 +1,25 @@
 <div class="card">
   <div class="card-body">
+    
     {{> postInfo post}}
 
     {{#if loggedIn}}
-    <form class="mt-3" id="add-comment">
-      <div class="form-group">
-        <label for="comment-body">Add a comment:</label>
+    <form class="mt-4" id="add-comment">
+      <div class="form-group mb-4">
+        <label for="comment-body" class="form-label">Add a comment:</label>
         <textarea class="form-control" id="comment-body" rows="3"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     {{/if}}
+
+    {{#if post.comments.length}}
+    <h4 class="mt-5 mb-3">Comments:</h4>
     {{> comments post.comments}}
+    {{else}}
+    <p class="mt-5 mb-0">No comments yet.</p>
+    {{/if}}
   </div>
 </div>
 
-{{#if loggedIn}}
-  <script src="../js/comment.js"></script>
-{{/if}}
+<script src="../js/comment.js"></script>
