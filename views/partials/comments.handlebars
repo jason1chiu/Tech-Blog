@@ -4,17 +4,18 @@
     <div class="meta d-flex align-items-center mb-2 justify-content-between">
       <div>
         <i class="bi bi-person-circle me-2"></i> 
-        <span>{{user.username}} on {{format_date created_at}}</span>
+        <span>{{user.username}}&nbsp;on&nbsp;{{format_date created_at}}</span>
       </div>
-      {{#if user}}
       <div class="d-flex align-items-center">
-        <button class="btn btn-danger delete-comment-btn" data-comment-id="{{id}}"><i class="bi bi-trash"></i>Delete Comment</button>
+        <button class="btn btn-danger delete-comment-btn mx-2" data-comment-id="{{id}}">
+          <i class="bi bi-trash me-2"></i>
+          Delete
+        </button>
+        <button class="btn btn-primary update-comment-btn mx-2" data-comment-id="{{id}}" data-action="update">
+          <i class="bi bi-pencil me-2"></i>
+          Update
+        </button>
       </div>
-      {{else}}
-      <div class="d-flex align-items-center">
-        <button class="btn btn-danger delete-comment-btn" data-comment-id="{{id}}" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="bi bi-trash"></i>Delete Comment</button>
-      </div>
-      {{/if}}
     </div>
     <div class="text">
       {{comment_text}}
@@ -42,4 +43,26 @@
   </div>
 </div>
 
+<!-- Update Comment Form Modal -->
+<div class="modal fade" id="updateFormModal" tabindex="-1" aria-labelledby="updateFormModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="updateFormModalLabel">Update Comment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="update-comment-form">
+          <div class="mb-3">
+            <label for="update-comment-text" class="form-label">Comment Text</label>
+            <textarea class="form-control" id="update-comment-text" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="../../js/deleteComment.js"></script>
+<script src="../../js/updateComment.js"></script>
