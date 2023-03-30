@@ -1,0 +1,15 @@
+<div class="comments">
+  {{#each comment}}
+  <section class="comment mb-3 pb-3 border-bottom">
+    <div class="meta d-flex align-items-center mb-2 justify-content-between">
+      <div>
+        <i class="bi bi-person-circle me-2"></i> 
+        <span>{{user.username}}&nbsp;on&nbsp;{{format_date created_at}}</span>
+      </div>
+    </div>
+    <div class="text">
+      {{comment_text}}
+    </div>
+  </section>
+  {{/each}}
+</div>

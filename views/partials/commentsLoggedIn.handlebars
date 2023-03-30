@@ -1,5 +1,5 @@
-<div class="comments">
-  {{#each this}}
+<div class="comments" data-logged-in-user-id="{{loggedInUser.id}}">
+  {{#each comment}}
   <section class="comment mb-3 pb-3 border-bottom">
     <div class="meta d-flex align-items-center mb-2 justify-content-between">
       <div>
@@ -7,11 +7,12 @@
         <span>{{user.username}}&nbsp;on&nbsp;{{format_date created_at}}</span>
       </div>
       <div class="d-flex align-items-center">
-        <button class="btn btn-danger delete-comment-btn mx-2" data-comment-id="{{id}}">
+        <button class="btn btn-danger delete-comment-btn mx-2" data-comment-id="{{id}}" data-user-id="{{user.id}}">
           <i class="bi bi-trash me-2"></i>
           Delete
         </button>
-        <button class="btn btn-primary update-comment-btn mx-2" data-comment-id="{{id}}" data-action="update">
+        {{user.id}}
+        <button class="btn btn-primary update-comment-btn mx-2" data-comment-id="{{id}}" data-user-id="{{user.id}}" data-action="update">
           <i class="bi bi-pencil me-2"></i>
           Update
         </button>

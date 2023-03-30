@@ -18,15 +18,6 @@ router.get('/', (req, res) => {
     });
 });
 
-// router.get('/', (req, res) => {
-//   Comment.findAll({})
-//     .then(dbCommentData => res.json(dbCommentData))
-//     .catch(err => {
-//       console.log(err);
-//       res.status(500).json(err);
-//     });
-// });
-
 // CREATE a new comment
 router.post('/', withAuth, (req, res) => {
   // check session
