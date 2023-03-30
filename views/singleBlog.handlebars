@@ -14,10 +14,14 @@
     {{/if}}
 
     {{#if post.comments.length}}
-    <h4 class="mt-5 mb-3">Comments:</h4>
-    {{> comments post.comments}}
+        <h4 class="mt-5 mb-3">Comments:</h4>
+        {{#if loggedIn}}
+          {{> commentsLoggedIn comment=post.comments}}
+        {{else}}
+          {{> commentsLoggedOut comment=post.comments}}
+        {{/if}}
     {{else}}
-    <p class="mt-5 mb-0">No comments yet.</p>
+      <p class="mt-5 mb-0">No comments yet.</p>
     {{/if}}
   </div>
 </div>

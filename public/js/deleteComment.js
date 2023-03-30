@@ -2,9 +2,10 @@ async function deleteFormHandler(event) {
   event.preventDefault();
 
   const commentId = event.target.getAttribute('data-comment-id');
+  const userId = event.target.getAttribute('data-user-id');
 
   // Check if the user is logged in
-  const response = await fetch('/api/users/me');
+  const response = await fetch(`/api/users/${userId}`);
   const user = await response.json();
 
   if (user) {
