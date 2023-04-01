@@ -1,84 +1,39 @@
+// Check if the user is logged in
+fetch(`/api/comments/me`)
+  .then(response => response.text())
+  .then(user => {
+    document.querySelectorAll('.update-comment-btn').forEach((button) => {
+      if (button) {
+        const userId = button.getAttribute('data-user-id');
+        if (userId != user) {
+          button.disabled = true;
+          button.classList.add("disabled");
+        } else {
+          button.addEventListener('click', updateFormHandler);
+      }
+    } 
+  });
+});
+
+let currentCommentId; // Add this line at the beginning of your script to store the currentCommentId
+
 async function updateFormHandler(event) {
   event.preventDefault();
 
-  const commentId = event.target.getAttribute('data-comment-id');
-  const commentUserId = event.target.getAttribute('data-user-id');
-
-  // Get the logged-in user's ID from the data attribute
-  const loggedInUserId = document.querySelector('.comments').getAttribute('data-logged-in-user-id');
-
-  // Check if the logged-in user ID matches the comment user ID
-  if (loggedInUserId && commentUserId && loggedInUserId == commentUserId) {
-    // Show the update form modal
-    const updateFormModal = new bootstrap.Modal(document.getElementById('updateFormModal'), {});
-    updateFormModal.show();
-  } else {
-    // Show the login modal
-    const modal = new bootstrap.Modal(document.getElementById('loginModal'), {});
-    modal.show();
-  }
+  currentCommentId = event.target.getAttribute('data-comment-id'); // Store the commentId when showing the modal
+  
+  const updateFormModal = new bootstrap.Modal(document.getElementById('updateFormModal'), {});
+  updateFormModal.show();
 }
-
-// async function updateFormHandler(event) {
-//   event.preventDefault();
-
-//   const commentId = event.target.getAttribute('data-comment-id');
-//   const commentUserId = event.target.getAttribute('data-user-id');
-
-//   // Get the logged-in user's ID from the data attribute
-//   const loggedInUserId = document.querySelector('.comments').getAttribute('data-logged-in-user-id');
-
-//   // Fetch the logged-in user's data using the /api/users/:id endpoint
-//   const response = await fetch(`/api/users/${loggedInUserId}`);
-//   const user = await response.json();
-
-//   if (response.ok && user && user.id == commentUserId) {
-//     const updateFormModal = new bootstrap.Modal(document.getElementById('updateFormModal'), {});
-//     updateFormModal.show();
-//   } else {
-//     const modal = new bootstrap.Modal(document.getElementById('loginModal'), {});
-//     modal.show();
-//   }
-// }
-
-document.querySelectorAll('.update-comment-btn').forEach((button) => {
-  button.addEventListener('click', updateFormHandler);
-});
-
-
-// async function updateFormHandler(event) {
-//   event.preventDefault();
-
-//   const commentId = event.target.getAttribute('data-comment-id');
-//   const userId = event.target.getAttribute('data-user-id');
-
-//   // Check if the user is logged in
-//   const response = await fetch(`/api/users/${userId}`);
-//   const user = await response.json();
-
-//   console.log(response);
-//   if (user) {
-//     if (response.ok) {
-//       const updateFormModal = new bootstrap.Modal(document.getElementById('updateFormModal'), {});
-//       updateFormModal.show();
-//     } else {
-//       const modal = new bootstrap.Modal(document.getElementById('loginModal'), {});
-//       modal.show();
-//     }
-//   }
-// }
-// document.querySelectorAll('.update-comment-btn').forEach((button) => {
-//   button.addEventListener('click', updateFormHandler);
-// });
 
 async function updateCommentHandler(event) {
   event.preventDefault();
 
-  const commentId = event.target.getAttribute('data-comment-id');
+  const commentId = currentCommentId; // Use the stored commentId here
 
   // Get the comment data from the form
   const commentText = document.querySelector('#update-comment-text').value.trim();
-
+  
   // Send the update request
   const response = await fetch(`/api/comments/${commentId}`, {
     method: 'PUT',
@@ -90,13 +45,14 @@ async function updateCommentHandler(event) {
     })
   });
 
-  if (response.ok) {
-    // Comment was updated successfully, reload the page
-    document.location.reload();
-  } else {
-    // There was an error updating the comment
-    // You can display an error message to the user here
-  }
+    if (response.status === 403) {
+      const modal = new bootstrap.Modal(document.getElementById('loginModal'), {});
+      modal.show();
+    } else if (response.status === 404) {
+      alert("You are a hacker");
+    } else if (response.ok) {
+      document.location.reload();
+    }
 }
 
 document.querySelector('#update-comment-form').addEventListener('submit', updateCommentHandler);

@@ -22,4 +22,7 @@ const commentFormHandler = async (event) => {
   }
 };
 
-document.querySelector('#add-comment').addEventListener('submit', commentFormHandler);
+let button = document.querySelector('#add-comment')
+if (button) {
+  button.addEventListener('submit', commentFormHandler);
+}
