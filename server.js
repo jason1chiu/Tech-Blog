@@ -13,8 +13,9 @@ const PORT = process.env.PORT || 3001;
 const sess = {
   secret: 'Super secret secret',
   cookie: {
-    maxAge: 6000000
+    maxAge: 6000,
   },
+  rolling: true,
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({
@@ -35,6 +36,14 @@ app.use(session(sess));
 
 app.use(routes);
 
+app.get('/check-session', (req, res) => {
+  if (req.session && req.session.user_id) {
+    res.json({ loggedIn: true });
+  } else {
+    res.json({ loggedIn: false });
+  }
+});
+
 sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
+  app.listen(PORT, () => console.log(`App listening on ${PORT}!`));
 });
