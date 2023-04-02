@@ -26,6 +26,7 @@ router.get('/', (req, res) => {
   })
   .then(dbPostData => {
     const posts = dbPostData.map(post => post.get({ plain: true }));
+    console.log(posts); // Add this line to check if the posts are retrieved correctly
     res.render('homepage', { 
       posts, 
       loggedIn: req.session.loggedIn,
