@@ -1,0 +1,11 @@
+.shadow-box {
+  max-width: 300px;
+}
+
+.title {
+  font-size: 40px;
+}
+
+#card-body {
+  font-weight: bold;
+}
