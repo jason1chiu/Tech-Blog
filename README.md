@@ -16,7 +16,7 @@ My motivation is to have a platform where I can share my expertise, experiences,
 
 ## Installation
 1. No installation needed
-2. Head over to this [website](https://aqueous-tundra-56406.herokuapp.com).
+2. Head over to this [website](https://aqueous-tundra-56406.herokuapp.com)
 
 
 ## Usage
